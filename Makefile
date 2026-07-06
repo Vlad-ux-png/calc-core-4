@@ -1,3 +1,26 @@
+COMPILER = iverilog
+SIMULATOR = vvp
+VIEWER = gtkwave
+
+SRC = src/core.v
+TESTBENCH = sim/tb.v
+OUTPUT = sim/design.vvp
+VCD_FILE = sim/simulation.vcd
+
+all: compile run
+
+compile:
+	$(COMPILER) -o $(OUTPUT) $(SRC) $(TESTBENCH)
+
+run:
+	$(SIMULATOR) $(OUTPUT)
+
+wave:
+	$(VIEWER) $(VCD_FILE) &
+
+clean:
+	rm -f $(OUTPUT) $(VCD_FILE)
+
 push:
 	git add .
 	git commit -m "CalcCore-8"

@@ -2,7 +2,7 @@ COMPILER = iverilog
 SIMULATOR = vvp
 VIEWER = gtkwave
 
-SRC = src/core.v
+SRC = src/cpu.v
 TESTBENCH = sim/tb.v
 OUTPUT = sim/design.vvp
 VCD_FILE = sim/simulation.vcd
@@ -35,4 +35,8 @@ clean:
 	rm -f $(OUTPUT) $(VCD_FILE)
 
 cpp:
-	verilator -Wall --cc src/core.v --top-module cpu
+	verilator -Wall -Wno-fatal --cc src/cpu.v --top-module cpu
+
+re:
+	make clean
+	make all

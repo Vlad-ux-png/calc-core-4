@@ -10,7 +10,7 @@ VCD_FILE = sim/simulation.vcd
 all: compile run
 
 compile:
-	$(COMPILER) -o $(OUTPUT) $(SRC) $(TESTBENCH)
+	$(COMPILER) -g2012 -o $(OUTPUT) $(SRC) $(TESTBENCH)
 
 run:
 	$(SIMULATOR) $(OUTPUT)
@@ -25,3 +25,14 @@ push:
 	git add .
 	git commit -m "CalcCore-8"
 	git push origin main --force
+
+test:
+	make compile
+	make run
+	make wave
+
+clean:
+	rm -f $(OUTPUT) $(VCD_FILE)
+
+cpp:
+	verilator -Wall --cc src/core.v --top-module cpu
